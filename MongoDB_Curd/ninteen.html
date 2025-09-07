@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <label>Name:</label>
+    <input type="text" placeholder="enter text"  id = "name"  ><br><br>
+    <label>Email:</label>
+    <input type="email" placeholder="enter email" id="email"><br><br>
+    <button onclick="SubmitForm()" >Submit</button>
+
+    <script>
+        function SubmitForm(){
+         document.getElementById("name").style.border = "red";
+
+        if(!name){
+            alert("plaese fill out above all this field");
+        }
+    }
+    </script>
+</body>
+</html>

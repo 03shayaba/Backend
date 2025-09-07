@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+    <input type="text" placeholder="Enter first num" id="num1"><br><br>
+    <input type="text" placeholder="Enter second num" id="num2"><br> <br>
+
+    <button onclick="clickbtn()">Calculate Sum</button><br><br>
+
+    <div id="finalSum"></div>
+
+
+    <!-- <script>
+        // function clickbtn() {
+        //     const a = document.getElementById("num1").value;
+        //     const b = document.getElementById("num2").value;
+        //     fetch("https://sum-server.100xdevs.com/sum?a=" + a + "&b=" + b)
+        //         .then(function(response) {
+        //             response.text()
+        //                 .then(function(ans) {
+        //                     document.getElementById("finalSum").innerHTML = ans;
+        //                 })
+        //         });
+        // }
+    
+        // same as above
+       async function clickbtn() {
+            const a = document.getElementById("num1").value;
+            const b = document.getElementById("num2").value;
+            const response = await fetch("https://sum-server.100xdevs.com/sum?a=" + a + "&b=" + b);
+            const ans = await response.text();
+            document.getElementById("finalSum").innerHTML = `Sum: ${ans}`;
+       }
+    </script> -->
+
+
+
+    <script>
+        async function clickbtn() {
+            try {
+                const a = document.getElementById("num1").value;
+                const b = document.getElementById("num2").value;
+
+                // Validate input
+                if (isNaN(a) || isNaN(b) || a.trim() === "" || b.trim() === "") {
+                    document.getElementById("finalSum").innerHTML = "Please enter valid numbers!";
+                    return;
+                }
+
+                // Fetch the sum from the server
+                const response = await fetch("https://sum-server.100xdevs.com/sum?a=" + a + "&b=" + b);
+                const ans = await response.text();
+
+                // Display the result
+                document.getElementById("finalSum").innerHTML = `Sum: ${ans}`;
+            } catch (error) {
+                // Handle errors
+                console.error("Error fetching the sum:", error);
+                document.getElementById("finalSum").innerHTML = "Error fetching the sum. Please try again later.";
+            }
+        }
+    </script>
+</body>
+
+</html>

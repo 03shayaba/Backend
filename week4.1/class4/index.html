@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function clickbtn(){
+        const num1 = document.getElementById("num1").value;
+        const num2 = document.getElementById("num2").value;
+        const element = document.getElementById("finalSum");
+        
+        const sum= Number(num1) + Number(num2)  ;
+        element.innerHTML = `sum:${sum}`;
+    }
+    function clearbtn(){
+        document.getElementById("num1").value = "";
+        document.getElementById("num2").value = "";
+        document.getElementById("finalSum")= "";
+    }
+</script>
+<body>
+   <input type = "text"  placeholder="Enter first num" id="num1"><br><br>
+   <input type = "text"  placeholder="Enter second num" id="num2"><br> <br>
+
+   <button onclick="clickbtn()">Calculate Sum</button><br><br>
+    <button onclick="clearbtn()">clear</button><br><br>
+   <div id = "finalSum"></div>
+   
+</body>
+</html>

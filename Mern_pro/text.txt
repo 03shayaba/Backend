@@ -1,0 +1,12 @@
+{
+ "username":"shdh",  
+"email":"Shaivani23@gmail.com" ,
+"password":"querty"
+}
+
+{
+ "username":"shdh",  
+"email":"Shaivani23@gmail.com" ,
+"phone":"329849752",
+"password":"querty"
+}
