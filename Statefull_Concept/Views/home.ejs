@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>hey from server</h1>
+
+    <% (locals.id)  { %>
+        <p>URL generated: http://localhost/url/<%id%></p>
+    <%} %>
+
+    <form action="/url" method="POST">
+        <label for="">Enter your origin url</label>
+        <input type="text" name="url" 
+        placeholder="https://example.com">
+        <button type="submit">Generate</button>
+        <br>
+         <a href="/user/signup">Signup</a> | <a href="/user/login">Login</a>
+    </form>
+</body>
+</html>
