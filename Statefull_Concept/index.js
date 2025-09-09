@@ -4,6 +4,7 @@ const UserRoutes = require("./Routes/userRoutes.js");
 const Urlroutes = require("./Routes/Url.js");
 const staticRoutes = require("./Routes/Static-routes.js")
 const connectDB = require("./connect");
+const { restrictTologgedInUserOnly, checkAuth } = require('./middleware/auth_middle.js')
 const User = require("./Models/user.js");
 const cookieParser = require("cookie-parser");
 const app = express();
@@ -29,11 +30,15 @@ app.use(cookieParser());
 //   });
 // });
 
-app.use("/user", UserRoutes);
-app.use("/url", Urlroutes);
-app.use('/', staticRoutes);
 
-app.get("/url/:shortId", async (req, res) => {
+app.use("/url",  restrictTologgedInUserOnly , Urlroutes);
+app.use("/user",  UserRoutes);
+app.use("/", checkAuth, staticRoutes);
+app.use("/user", staticRoutes);
+
+
+
+app.get("/:shortId", async (req, res) => {
   const shortId = req.params.shortId;
   const entry = await Url.findOneAndUpdate(
     {

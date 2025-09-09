@@ -11,9 +11,7 @@ const handleCreate = async (req, res) => {
   return res.render("home");
 };
 
-const getRequest1 = async (req, res) => {
-  return res.render("signup");
-};
+
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -26,19 +24,20 @@ const loginUser = async (req, res) => {
    if (user.password !== password) {
     return res.json({ error: "Invalid password" });
   }
-  const sessionId =uuidv4();
-  setUser(sessionId , user);
-  res.cookie('uid', sessionId);
+  // const sessionId =uuidv4();
+  // setUser(sessionId , user);
+
+ const token = setUser(user);
+  res.cookie('uid', token);
+  console.log("Generated token:", token);
+
   return res.redirect("/");
 };
 
-const getRequest2 = async (req, res) => {
-  // const allUrls = await URL.find({});
-  return res.render("login");
-};
+
 module.exports = {
   handleCreate,
-  getRequest1,
+
   loginUser,
-  getRequest2,
+ 
 };

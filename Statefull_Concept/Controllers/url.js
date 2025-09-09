@@ -17,8 +17,8 @@ const  handleGenerateNewShortURL = async(req, res)=>{
     visitHistory: [],
     // createdBy: req.user._id,
   });
-
-  return res.json( {
+  return res.render('home',
+   {
     id: shortID,
   });
 }

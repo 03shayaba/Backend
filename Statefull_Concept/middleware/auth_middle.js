@@ -1,8 +1,10 @@
 const { getUser } = require('../services/auth.js')
 
-const restrictTologgedInUserOnly = async(req, res)=> {
-    const userUid = req.cookies.uid ;
-
+const restrictTologgedInUserOnly = async(req, res , next)=> {
+    console.log(req);
+    const userUid = req.cookies?.uid ;
+    console.log("🔑 Cookie token in middleware:", userUid);
+    // console.log(req.cookies.uid)
     if(!userUid){
         return res.redirect('/login');
     }
@@ -15,7 +17,14 @@ const restrictTologgedInUserOnly = async(req, res)=> {
     next();
 }
 
+async function checkAuth(req, res, next) {
+const userUid = req.cookies?.uid;
 
-module.exports = {
+  const user = getUser(userUid);
+
+  req.user = user;
+  next();
+}
+module.exports = {checkAuth,
     restrictTologgedInUserOnly 
 }
