@@ -48,6 +48,7 @@ export const register = async (req, res) => {
     await transporter.sendMail(mailOptions);
     return res.json({
       success: true,
+      message:"you are registerd successfully"
     });
   } catch (err) {
     // console.log(err);
@@ -96,6 +97,7 @@ export const login = async (req, res) => {
 
     return res.json({
       success: true,
+      message:"you are login "
     });
   } catch (error) {
     return res.json({
@@ -263,7 +265,7 @@ export const sendResetOtp = async (req, res) => {
 
 export const resetPassword = async (req, res) =>{
   const {email , otp , newPassword} = req.body ;
-  if(!email || !opt || !newPassword){
+  if(!email || !otp || !newPassword){
     return res.json({success:false, message:"email, otp , and new password are required"})
   }
 
@@ -277,7 +279,7 @@ export const resetPassword = async (req, res) =>{
       });
     }
 
-    if(user.resetOtp === "" || user.resetOtp !== otp){
+    if(user.resetOtp ==="" || user.resetOtp !== otp){
       return res.json({
         success:false , message:'invalid OTP'
       });
@@ -296,9 +298,17 @@ export const resetPassword = async (req, res) =>{
 
     user.resetOtp = '';
     user.resetOtpExpireAt = 0;
-    await user.save
+    await user.save();
+    return res.json({
+  success: true,
+  message: "Password reset successfully",
+});
 
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
 }
+
+
+
+
