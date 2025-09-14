@@ -9,15 +9,17 @@ import userRouter from "./routes/userRoutes.js";
 const app = express() ;
 const port =process.env.PORT|| 3000;
 connectdb();
+
+const allowdOrigins = ['http://localhost:5173' ]
 app.use(express.json());
 
 app.use(cookieParser());
-app.use(cors({credentials:true}))
+app.use(cors({origin:allowdOrigins,credentials:true}))
 
 // Api endpoints
-// app.get('/user' ,(req,res)=>{
-//    res.send("api working");
-// })
+app.get('/user' ,(req,res)=>{
+   res.send("api working");
+})
 
 app.use('/api/auth' , authrouter);
 app.use('/api/user' , userRouter);
