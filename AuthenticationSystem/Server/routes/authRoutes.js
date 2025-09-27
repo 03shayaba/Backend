@@ -9,6 +9,6 @@ authrouter.post('/login' , login);
 authrouter.post('/logout' , logout);
 authrouter.post('/send-verify-otp' , userAuth, sendVerifyOtp);
 authrouter.post('/verufy-account' , userAuth, verifyEmail);
-authrouter.post('/is-auth' , userAuth, isAuthenticated);
+authrouter.get('/is-auth' , userAuth, isAuthenticated);
 authrouter.post('/send-reset-otp' , sendResetOtp);
 authrouter.post('/reset-password',resetPassword);

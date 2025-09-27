@@ -130,8 +130,14 @@ export const logout = async (req, res) => {
 // send verification OTP to the User's Email
 export const sendVerifyOtp = async (req, res) => {
   try {
-    const { userId } = req.body;
+    // const { userId } = req.body;
+    // const user = await userModel.findById(userId);
+     const userId = req.user.userId;  
+    
     const user = await userModel.findById(userId);
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
     if (user.isAccountverified) {
       return res.json({
         success: false,
@@ -146,7 +152,7 @@ export const sendVerifyOtp = async (req, res) => {
     const mailoption = {
       from: process.env.SENDER_EMAIL,
       to: user.email,
-      sunject: "Accout verification otp",
+      subject: "Accout verification otp",
       text: `Your otp is ${otp} . verify your account using this OTP`,
     };
     await transporter.sendMail(mailoption);
@@ -163,8 +169,8 @@ export const sendVerifyOtp = async (req, res) => {
 };
 
 export const verifyEmail = async (req, res) => {
-  const { userId, otp } = req.body;
-
+  const { otp } = req.body;
+  const userId = req.user.userId; 
   if (!userId || !otp) {
     return res.json({
       success: false,

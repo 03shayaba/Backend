@@ -3,16 +3,19 @@ import Left from './home/left/left.jsx';
 import Right from './home/right/right.jsx';
 import Logout from './home/left1/Logout.jsx';
 import Signup from './components/Signup.jsx';
+import Login from './components/Login.jsx';
 const App = () => {
   return (
     <>
-      <div className='flex h-screen'>
+      {/* <div className='flex h-screen'>
         <Logout></Logout>
         <Left></Left>
         <Right></Right>
-     </div>
+     </div> */}
 
-     {/* <Signup /> */}
+     <Signup />
+
+        {/* <Login /> */}
     </>
   )
 }

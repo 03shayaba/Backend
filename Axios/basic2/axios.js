@@ -129,3 +129,51 @@ function makerequest() {
 //     console.log(error);
 //   }
 // }
+
+// async function makerequest(){
+//   try {
+//      console.log("bitton clicked");
+//      const res = await axios('data.json');
+//      console.log(res);
+//       ;
+//     //  console.log(data.users);
+//      console.log(res.data.users[0].email);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// }
+
+
+async function makerequest(){
+  try {
+     console.log("bitton clicked");
+
+     const config ={
+      method:'get',
+      url:'data.json',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      data:'{"name":"faizan" , "job":"web-dev"}'
+     }
+     const res = await axios(config);
+     console.log(res);
+     console.log(res.data);
+     const new_data =JSON.parse(config.data)
+     const main_data = JSON.stringify(new_data)
+      console.log(JSON.parse(config.data));
+     console.log("new data convert string to object :" , new_data);
+     console.log("main data convert back to string :" + main_data);
+    //  console.log(res.data.users[0].email);
+  } catch (error) {
+    console.log("the error is :" + error.message);
+  }
+}
+
+
+
+
+
+
+
+

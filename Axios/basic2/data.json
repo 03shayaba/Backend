@@ -1,5 +1,40 @@
 {
-    "name":"shayaba" ,
-    "email" :"exp@gmailc.com",
-    "age" :20
+  "users": [
+    {
+      "id": 1,
+      "name": "Shayaba Bano",
+      "email": "shayaba@example.com",
+      "isActive": true,
+      "roles": ["admin", "editor"],
+      "profile": {
+        "age": 22,
+        "city": "Lucknow",
+        "country": "India"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Aman Verma",
+      "email": "aman@example.com",
+      "isActive": false,
+      "roles": ["user"],
+      "profile": {
+        "age": 25,
+        "city": "Delhi",
+        "country": "India"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Priya Sharma",
+      "email": "priya@example.com",
+      "isActive": true,
+      "roles": ["user", "moderator"],
+      "profile": {
+        "age": 28,
+        "city": "Mumbai",
+        "country": "India"
+      }
+    }
+  ]
 }

@@ -9,11 +9,14 @@ const userAuth = async(req , res , next) =>{
         })
     }
 
+    console.log(token);
+
     try {
        const tokendecode = jwt.verify(token , process.env.JWT_SECRET)
-
-       if(tokendecode.id){
-        req.body.userId = tokendecode.id
+        console.log( "token id" ,tokendecode.id);
+        if (tokendecode .id) {
+      req.user = { userId: tokendecode .id }; // ✅ Safe place to store user id
+      console.log("User ID from token:", req.user.userId);
        }else{
         return res.json({success:false,
             message:'not Authorized Login Again'
@@ -25,7 +28,7 @@ const userAuth = async(req , res , next) =>{
     } catch (error) {
        return res.json({
             success:false ,
-            message:error.message
+            message:"no data parsed"
         }) 
     }
 }

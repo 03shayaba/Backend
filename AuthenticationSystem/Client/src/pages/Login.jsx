@@ -4,11 +4,13 @@ import {useNavigate  } from 'react-router-dom';
 import { assets } from '../assets/assets';
 import { AppContext } from '../context/AppContext';
 import { toast } from 'react-toastify';
+import axios from 'axios';
+
 const Login = () => {
     const navigate = useNavigate()
 
 
-    const {backendUrl , setIsLoggedin } = useContext(AppContext)
+    const {backendUrl , setIsLoggedin  , getUserData} = useContext(AppContext)
 
     const [state, setState] = useState("Sign Up")
     const [name, setName] = useState('')
@@ -16,7 +18,7 @@ const Login = () => {
     const [password, setPassword] = useState('')
 
 
-   const  onSubmitHandler = async() =>{
+   const  onSubmitHandler = async(e) =>{
     try {
         e.preventDefault();
 
@@ -26,7 +28,8 @@ const Login = () => {
          const {data} =  await axios.post(backendUrl + '/api/auth/register' , {name , email , password})
 
             if(data.success){
-                setIsLoggedin(ture)
+                setIsLoggedin(true)
+               await getUserData()
                 navigate('/')
             }else{
              toast.error(data.message);
@@ -36,14 +39,15 @@ const Login = () => {
             const {data} =  await axios.post(backendUrl + '/api/auth/login' , { email , password})
 
             if(data.success){
-                setIsLoggedin(ture)
+                setIsLoggedin(true)
+              await  getUserData()
                 navigate('/')
             }else{
              toast.error(data.message);
             }
         }
     } catch (error) {
-        toast.error(data.message); 
+        toast.error(error.response?.data?.message || "Something went wrong");
     }
    }
     return (
@@ -71,9 +75,9 @@ const Login = () => {
                     <div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]' >
                         <img src={assets.lock_icon} alt="" />
                         <input onChange={e => setPassword(e.target.value)} value ={password} 
-                        className='bg-transparent outline-none text-white' type="password" placeholder="password" required />
+                        className='bg-transparent outline-none text-white' type="password" placeholder="Password" required />
                     </div>
-                    <p onClick={() =>{navigate('/reset-password')}} className=' mb-4 text-indego-500 cursor-pointer'>Forgot Password</p>
+                    <p onClick={() =>{navigate('/reset-password')}} className=' mb-4 text-indigo-500 cursor-pointer'>Forgot Password</p>
                     <button className='w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 '>{state}</button>
                 </form>
 
